@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/cristech-ar/challenge_interbanking#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.14.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
