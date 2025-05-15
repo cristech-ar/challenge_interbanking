@@ -1,0 +1,19 @@
+{
+  "name": "challenge-interbanking",
+  "version": "1.0.0",
+  "description": "Backend challenge by sooft technologies for interbanking",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristech-ar/challenge_interbanking.git"
+  },
+  "author": "Cristian Ríos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cristech-ar/challenge_interbanking/issues"
+  },
+  "homepage": "https://github.com/cristech-ar/challenge_interbanking#readme"
+}
