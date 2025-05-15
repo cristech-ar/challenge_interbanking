@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cristech-ar/challenge_interbanking/issues"
   },
-  "homepage": "https://github.com/cristech-ar/challenge_interbanking#readme"
+  "homepage": "https://github.com/cristech-ar/challenge_interbanking#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
