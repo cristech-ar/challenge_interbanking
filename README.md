@@ -30,7 +30,7 @@ git clone https://github.com/your-username/interbanking-challenge-api.git
 cd interbanking-challenge-api
 ```
 
-2. Create the environment file:
+2. Create the environment file (.env.exapmle file available):
 
 ```bash
 cp .env.example .env
