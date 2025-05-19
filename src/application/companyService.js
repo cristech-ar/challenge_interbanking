@@ -1,4 +1,4 @@
-function createCompanyService({ companyRepo, transferRepo }) {
+function createCompanyService({ companyRepo }) {
     return {
         async addCompany(data) {
             const { createCompany } = require('../domain/company');
@@ -6,12 +6,8 @@ function createCompanyService({ companyRepo, transferRepo }) {
             return await companyRepo.create(company);
         },
 
-        async empresasAdheridasUltimoMes() {
+        async companiesAddedLastMonth() {
             return await companyRepo.findByLastMonth();
-        },
-
-        async empresasConTransferenciasUltimoMes() {
-            return await transferRepo.findCompanyByTransfersLastMonth();
         }
     };
 }

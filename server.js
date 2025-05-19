@@ -1,9 +1,9 @@
 const express = require('express');
 require('dotenv').config();
-mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     setupSwagger = require('./src/config/swagger'),
     helmet = require('helmet');
-    
+
 
 const { createCompanyRoutes } = require('./src/infrastructure/http/companyRoutes');
 const { createCompanyService } = require('./src/application/companyService');
@@ -12,6 +12,7 @@ const { createTransferService } = require('./src/application/transferService');
 const { createCompanyRepoMongo } = require('./src/infrastructure/db/companyRepoMongo');
 const { createTransferRepoMongo } = require('./src/infrastructure/db/transferRepoMongo');
 const { initDefaultUser } = require('./src/infrastructure/db/initDefaultUser');
+const { authRoutes } = require('./src/infrastructure/http/authRoutes');
 
 
 (async () => {
@@ -32,19 +33,18 @@ const { initDefaultUser } = require('./src/infrastructure/db/initDefaultUser');
 
         // Casos de uso
         const companyService = createCompanyService({ companyRepo });
-        const transferSerive = createTransferService({ transferRepo });
+        const transferService = createTransferService({ transferRepo });
 
         // Inicializar Express
         const app = express();
         app.use(express.json());
 
         setupSwagger(app);
-
-        // Rutas
         app.use(helmet());
-        app.use('/auth', require('./src/infrastructure/http/authRoutes'));
+        // Rutas
+        app.use('/auth', authRoutes);
         app.use('/v1/companies', createCompanyRoutes(companyService));
-        app.use('/v1/transfers', createTransferRoutes(transferSerive));
+        app.use('/v1/transfers', createTransferRoutes(transferService));
         app.get('/', (req, res) => {
             res.redirect(301, '/explorer');
         });

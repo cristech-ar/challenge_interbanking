@@ -6,28 +6,27 @@ const User = require('../db/models/userModel');
 const router = express.Router();
 
 router.post('/login', async (req, res) => {
-  const { user, password } = req.body;
+  const { userName, password } = req.body;
 
-  if (!user || !password) {
+  if (!userName || !password) {
     return res.status(400).json({ error: 'User and password are required' });
   }
 
   try {
-    const user = await User.findOne({ user });
+    const user = await User.findOne({ userName });
     if (!user) return res.status(401).json({ error: 'Invalid credentials' });
-
     const isValid = await bcrypt.compare(password, user.passwordHash);
     if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
 
     const accessToken = jwt.sign(
-      { cuit: user.cuit },
+      {userNem: user.userName, type: 'access' },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || '15m' }
     );
 
     const refreshToken = jwt.sign(
-      { cuit: user.cuit },
-      process.env.JWT_SECRET,
+      { userName: user.userName },
+      process.env.JWT_REFRESH_SECRET,
       { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '1d' }
     );
 
@@ -49,15 +48,16 @@ router.post('/refresh-token', async (req, res) => {
   }
 
   try {
-    const payload = jwt.verify(refreshToken, process.env.JWT_SECRET);
 
-    const user = await User.findOne({ cuit: payload.cuit });
+    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+
+    const user = await User.findOne({ userName: payload.userName });
     if (!user || user.refreshToken !== refreshToken) {
       return res.status(401).json({ error: 'Invalid or revoked refresh token' });
     }
 
     const newAccessToken = jwt.sign(
-      { cuit: user.cuit },
+      { userName: user.userName },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || '15m' }
     );

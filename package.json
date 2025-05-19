@@ -4,7 +4,7 @@
   "description": "Backend challenge by sooft technologies for interbanking",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha tests/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,17 @@
   "homepage": "https://github.com/cristech-ar/challenge_interbanking#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.14.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.4.0"
   }
 }

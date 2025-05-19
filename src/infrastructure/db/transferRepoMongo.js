@@ -1,29 +1,53 @@
-const Transferencia = require('./models/transferenciaModel');
-const Empresa = require('./models/empresaModel');
+const Transfer = require('./models/transferModel');
 
-function createTransferenciaRepoMongo() {
+function createTransferRepoMongo() {
   return {
-    async create(transferenciaData) {
-      const transferencia = new Transferencia(transferenciaData);
+    async create(transfereData) {
+      const transferencia = new Transfer(transfereData);
       return await transferencia.save();
     },
 
-    async findEmpresasByTransferenciasLastMonth() {
+    async findCompaniesByTransfersLastMonth() {
       const oneMonthAgo = new Date();
-      const transferencias = await Transferencia.find({ fecha: { $gte: oneMonthAgo } }).populate('companyId');
-      const empresasUnicas = new Map();
-      transferencias.forEach(t => {
-        if (t.companyId && !empresasUnicas.has(t.companyId.cuit)) {
-          empresasUnicas.set(t.companyId.cuit, t.companyId);
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+      return Transfer.aggregate([
+        {
+          $match: { date: { $gte: oneMonthAgo } }
+        },
+        {
+          $group: {
+            _id: "$companyId",
+            transferCount: { $sum: 1 },
+            firstTransfer: { $first: "$$ROOT" }
+          }
+        },
+        {
+          $lookup: {
+            from: "companies",
+            localField: "_id",
+            foreignField: "_id",
+            as: "companyData"
+          }
+        },
+        {
+          $unwind: "$companyData"
+        },
+        {
+          $project: {
+            _id: "$companyData._id",
+            CUIT: "$companyData.CUIT",
+            name: "$companyData.name",
+            transferCount: 1
+          }
         }
-      });
-      return Array.from(empresasUnicas.values());
+      ]);
     },
 
     async findByCompanyId(companyId) {
-      return await Transferencia.find({ companyId });
+      return await Transfer.find({ companyId });
     }
   };
 }
 
-module.exports = { createTransferenciaRepoMongo };
+module.exports = { createTransferRepoMongo };

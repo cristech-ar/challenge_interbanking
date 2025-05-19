@@ -5,10 +5,12 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
-      - MONGO_URL=mongodb://mongo:27017/interbanking
-      - DB_NAME=interbanking
+      - MONGO_URL=${MONGO_URL}
+      - DB_NAME=${DB_NAME}
     depends_on:
       - mongo
+    env_file:
+      - .env
     volumes:
       - .:/app
     command: node server.js
