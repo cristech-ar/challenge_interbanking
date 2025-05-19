@@ -6,7 +6,7 @@ const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
-            title: 'Companies and Trasnfers API',
+            title: 'Companies and Transfers API',
             version: '1.0.0',
             description: 'API for managing companies and transfers.',
             contact: {
