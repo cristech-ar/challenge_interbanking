@@ -8,7 +8,7 @@ const swaggerOptions = {
         info: {
             title: 'Companies and Trasnfers API',
             version: '1.0.0',
-            description: 'API for managing companies and trasnfers.',
+            description: 'API for managing companies and transfers.',
             contact: {
                 name: 'Cristian Ríos',
                 email: 'contact@crisdev.tech',

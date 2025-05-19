@@ -1,8 +1,8 @@
 services:
-  app:
+  interbanking:
     build: .
     ports:
-      - "8080:8080"
+      - "4000:8080"
     environment:
       - PORT=8080
       - MONGO_URL=${MONGO_URL}
@@ -12,14 +12,10 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/interbanking
     command: node server.js
 
   mongo:
     image: mongo:6
     volumes:
-      - mongo_data:/data/db
-
-
-volumes:
-  mongo_data:
+      - mongo_data:/data/interbanking
