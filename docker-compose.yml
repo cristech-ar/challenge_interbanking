@@ -19,3 +19,6 @@ services:
     image: mongo:6
     volumes:
       - mongo_data:/data/interbanking
+
+volumes:
+  mongo_data:
