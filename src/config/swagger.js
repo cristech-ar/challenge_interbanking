@@ -35,7 +35,7 @@ const swaggerOptions = {
                     properties: {
                         CUIT: {
                             type: 'string',
-                            example: '20-12345678-9'
+                            example: '20123456789'
                         },
                         companyName: {
                             type: 'string',
