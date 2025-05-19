@@ -2,9 +2,9 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "4000:4000"
     environment:
-      - PORT=8080
+      - PORT=4000
       - MONGO_URL=${MONGO_URL}
       - DB_NAME=${DB_NAME}
     depends_on:
