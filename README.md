@@ -160,7 +160,7 @@ This project uses **Hexagonal Architecture (Ports and Adapters)** to structure t
 1. **Login** using a valid userName and password:
 
 ```bash
-curl -X POST https://challenge-interbanking.crisdev.tech/auth/login \
+curl -X POST https://challenge-sooft.crisdev.tech/auth/login \
      -H "Content-Type: application/json" \
      -d '{ "userName": "20304050607", "password": "interbank123" }'
 ```
@@ -174,7 +174,7 @@ curl -X POST https://challenge-interbanking.crisdev.tech/auth/login \
 3. **Call protected endpoint** with token:
 
 ```bash
-curl -X GET https://challenge-interbanking.crisdev.tech/empresas-adhesiones-recientes \
+curl -X GET https://challenge-sootf.crisdev.tech/tranfers/recents \
      -H "Authorization: Bearer <token>"
 ```
 
