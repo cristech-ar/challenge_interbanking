@@ -2,7 +2,7 @@
 
 Welcome to the backend solution developed for the technical challenge. This REST API is built with **Node.js**, **Express**, **MongoDB**, and follows the **Hexagonal Architecture (Ports and Adapters)** pattern. The project is containerized with Docker and includes security layers such as **JWT-based authentication** and **HTTPS support**.
 
-It was assumed that "transfers from last month" are those from the current month, taking into account that the endpoint to create new transfers was also added, the functionality can be tested with those newly created transfers.
+It was assumed that "last month's transfers" are those of the current month, considering that the endpoint to create new transfers was also added, the functionality can be tested with those newly created transfers.
 
 
 🔗 Deployed at: https://challenge-sooft.crisdev.tech
