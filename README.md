@@ -29,8 +29,8 @@ tests/                   # Unit tests
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/interbanking-challenge-api.git
-cd interbanking-challenge-api
+git clone https://github.com/cristech-ar/challenge_interbanking
+cd challenge_interbanking
 ```
 
 2. Create the environment file (.env.exapmle file available):
