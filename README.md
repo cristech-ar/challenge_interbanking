@@ -1,4 +1,4 @@
-# Sooft technologies Backend Challenge API 🚀
+# Sooft technology Backend Challenge API 🚀
 
 Welcome to the backend solution developed for the technical challenge. This REST API is built with **Node.js**, **Express**, **MongoDB**, and follows the **Hexagonal Architecture (Ports and Adapters)** pattern. The project is containerized with Docker and includes security layers such as **JWT-based authentication** and **HTTPS support**.
 
