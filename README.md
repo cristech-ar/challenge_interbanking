@@ -190,8 +190,7 @@ npm test
 
 Tests are focused on:
 
-- ✅ Business logic (domain and services)
-- ✅ Authentication flow
+- ✅ Business logic
 - ✅ Repository behavior with mocks
 
 ---
