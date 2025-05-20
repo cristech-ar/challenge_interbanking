@@ -119,7 +119,7 @@ This API incorporates several layers of security to simulate real-world enterpri
 
 - The API is served under a valid HTTPS certificate.
 - This ensures **encrypted communication** between clients and the server.
-- The production domain is: `https://challenge-interbanking.crisdev.tech`
+- The production domain is: `https://challenge-sooft.crisdev.tech`
 
 ### ✅ Helmet
 
