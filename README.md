@@ -85,7 +85,7 @@ All protected endpoints require a valid JWT in the `Authorization` header.
 }
 ```
 
-### Transfer Record (internal document schema)
+### Transfer Record
 
 ```json
 {
