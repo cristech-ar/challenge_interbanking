@@ -81,8 +81,7 @@ All protected endpoints require a valid JWT in the `Authorization` header.
 ```json
 {
   "CUIT": "20304050607",
-  "companyName": "Tech Solutions SRL",
-  "accession_date": "2024-08-10T00:00:00Z"
+  "companyName": "Tech Solutions SRL"
 }
 ```
 
@@ -94,7 +93,6 @@ All protected endpoints require a valid JWT in the `Authorization` header.
   "amount": 15000.75,
   "debitAccount": "0011223344556677889900",
   "creditAccount": "0099887766554433221100",
-  "date": "2024-08-20T12:34:56Z"
 }
 ```
 
