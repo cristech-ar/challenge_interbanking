@@ -35,7 +35,7 @@ describe('transferService using mock', () => {
     });
 
     const result = await service.companiesByTransfersLastMonth();
-    console.log(result);
+
 
     expect(result).to.have.lengthOf(1);
     expect(result[0]).to.include({

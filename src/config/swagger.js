@@ -103,7 +103,7 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['../src/infrastructure/http/*.js'],
+    apis: ['../infrastructure/http/*.js'],
 };
 
 

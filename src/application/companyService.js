@@ -8,7 +8,14 @@ function createCompanyService({ companyRepo }) {
 
         async companiesAddedLastMonth() {
             return await companyRepo.findByLastMonth();
+        },
+
+        async existsById(id) {
+            const company = await companyRepo.findById(id);
+            return !!company;
         }
+
+
     };
 }
 

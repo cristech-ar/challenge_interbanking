@@ -4,7 +4,7 @@ const { createCompanyService } = require('../../src/application/companyService')
 
 const fakeCompanyRepo = require('../mocks/mockCompanyRepo');
 
-describe('companyService (using manual mock)', () => {
+describe('companyService (using mock)', () => {
   const service = createCompanyService({ companyRepo: fakeCompanyRepo });
 
   beforeEach(() => {

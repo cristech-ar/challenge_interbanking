@@ -1,19 +1,25 @@
 const Transfer = require('./models/transferModel');
+const { Types } = require('mongoose');
 
 function createTransferRepoMongo() {
   return {
     async create(transfereData) {
-      const transferencia = new Transfer(transfereData);
-      return await transferencia.save();
+      const transfer = new Transfer(transfereData);
+      return await transfer.save();
     },
 
     async findCompaniesByTransfersLastMonth() {
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-
+      const startOfMonth = new Date();
+      startOfMonth.setDate(1);
+      startOfMonth.setHours(0, 0, 0, 0);
       return Transfer.aggregate([
         {
-          $match: { date: { $gte: oneMonthAgo } }
+          $match: { date: { $gte: startOfMonth } }
+        },
+        {
+          $addFields: {
+            companyId: { $toObjectId: "$companyId" }
+          }
         },
         {
           $group: {
@@ -44,9 +50,37 @@ function createTransferRepoMongo() {
       ]);
     },
 
-    async findByCompanyId(companyId) {
-      return await Transfer.find({ companyId });
-    }
+    async createTransfer({ amount, companyId, debitAccount, creditAccount }) {
+
+      // Validate the input data
+      if (!amount || !companyId || !debitAccount || !creditAccount) {
+        throw new Error('All fields are required');
+      }
+      if (isNaN(amount) || amount <= 0) {
+        throw new Error('Amount must be a positive number');
+      }
+      if (typeof companyId !== 'string' || companyId.trim() === '') {
+        throw new Error('Company ID must be a non-empty string');
+      }
+      if (typeof debitAccount !== 'string' || debitAccount.trim() === '') {
+        throw new Error('Debit account must be a non-empty string');
+      }
+      if (typeof creditAccount !== 'string' || creditAccount.trim() === '') {
+        throw new Error('Credit account must be a non-empty string');
+      }
+      // Check if the company exists
+
+      const transfer = new Transfer({
+        amount,
+        companyId,
+        debitAccount,
+        creditAccount
+      });
+
+      return await transfer.save();
+    },
+
+
   };
 }
 

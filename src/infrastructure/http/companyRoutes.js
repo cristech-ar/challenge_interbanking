@@ -1,6 +1,7 @@
 const express = require('express');
 const { authMiddleware } = require('./authMiddleware');
 
+
 function createCompanyRoutes(companyService) {
 
     const router = express.Router();

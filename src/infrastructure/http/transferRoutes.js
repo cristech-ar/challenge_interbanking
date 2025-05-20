@@ -5,11 +5,12 @@ function createTransferRoutes(transferService) {
     
     const router = express.Router();
     router.use(authMiddleware);
-
-    router.get('/transfers/recents', async (req, res) => {
+    
+    router.get('/recents/companies', async (req, res) => {
+        
 
         try {
-            const result = await transferService.companiesByRecentsTransfer();
+            const result = await transferService.companiesByTransfersLastMonth();
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json({ error: 'Failed to obtain the companies with recent transfers' });
@@ -17,6 +18,16 @@ function createTransferRoutes(transferService) {
         }
 
 
+    });
+
+    router.post('/', async (req, res) => {
+        try {
+            const { amount, companyId, debitAccount, creditAccount} = req.body;
+            const transfer = await transferService.createTransfer({ amount, companyId, debitAccount, creditAccount });
+            res.status(201).json(transfer);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to create transfer' });
+        }
     });
 
     return router;

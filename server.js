@@ -24,24 +24,23 @@ const { authRoutes } = require('./src/infrastructure/http/authRoutes');
         });
 
         console.log('🟢 Connected to MongoDB with Mongoose');
-
+        
         await initDefaultUser();
 
-        // Crear repositorios basados en modelos Mongoose
-        const companyRepo = createCompanyRepoMongo();         // internamente usa modelos mongoose
+        const companyRepo = createCompanyRepoMongo();         
         const transferRepo = createTransferRepoMongo();
 
-        // Casos de uso
-        const companyService = createCompanyService({ companyRepo });
-        const transferService = createTransferService({ transferRepo });
 
-        // Inicializar Express
+        const companyService = createCompanyService({ companyRepo });
+        const transferService = createTransferService({ transferRepo, companyService });
+
+
         const app = express();
         app.use(express.json());
 
         setupSwagger(app);
         app.use(helmet());
-        // Rutas
+
         app.use('/auth', authRoutes);
         app.use('/v1/companies', createCompanyRoutes(companyService));
         app.use('/v1/transfers', createTransferRoutes(transferService));

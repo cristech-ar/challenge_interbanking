@@ -15,7 +15,7 @@ src/
 ├── infrastructure/
 │   ├── db/              # MongoDB repositories
 │   └── http/            # HTTP routes and middlewares
-├── config/              # Configuration files (e.g., dotenv)
+├── config/              # Configuration files
 tests/                   # Unit tests
 ```
 
@@ -41,8 +41,14 @@ cp .env.example .env
 ```bash
 docker-compose up --build
 ```
+4. API will be available at localhost in port 4000 by default or the set into .env file:
 
-4. API will be available at:
+```
+http://localhost:${process.env.PORT}
+```
+
+---
+5. This API will be available at production :
 
 ```
 https://challenge-interbanking.crisdev.tech
@@ -52,12 +58,13 @@ https://challenge-interbanking.crisdev.tech
 
 ## 🧪 API Endpoints
 
-| Method | Endpoint                                 | Description                                |
-|--------|------------------------------------------|--------------------------------------------|
-| POST   | `/auth/login`                            | Authenticates user and returns a JWT token |
-| GET    | `/empresas-transferencias-recientes`     | Lists companies with transfers in last month |
-| GET    | `/empresas-adhesiones-recientes`         | Lists companies added in last month         |
-| POST   | `/empresas`                              | Registers a new company                     |
+| Method | Endpoint                                 | Description                                           |
+|--------|------------------------------------------|--------------------------------------------           |
+| POST   | `/auth/login`                            | Authenticates user and returns a JWT & refresh token  |
+| POST   | `/auth/refresh-token`                    | Receive refresh token and returns a JWT token         |
+| GET    | `/v1/transfers/recent/companies`         | Lists companies with transfers in last month          |
+| GET    | `/v1/companies/recent`                   | Lists companies added in last month                   |
+| POST   | `/v1/companies`                          | Registers a new company                               |
 
 All protected endpoints require a valid JWT in the `Authorization` header.
 
@@ -69,9 +76,9 @@ All protected endpoints require a valid JWT in the `Authorization` header.
 
 ```json
 {
-  "cuit": "20304050607",
-  "razonSocial": "Tech Solutions SRL",
-  "fechaAdhesion": "2024-08-10T00:00:00Z"
+  "CUIT": "20304050607",
+  "companyName": "Tech Solutions SRL",
+  "accession_date": "2024-08-10T00:00:00Z"
 }
 ```
 
@@ -79,11 +86,11 @@ All protected endpoints require a valid JWT in the `Authorization` header.
 
 ```json
 {
-  "empresaId": "6532e0dc0cf82305e4f0f6c1",
-  "importe": 15000.75,
-  "cuentaDebito": "0011223344556677889900",
-  "cuentaCredito": "0099887766554433221100",
-  "fecha": "2024-08-20T12:34:56Z"
+  "companyId": "6532e0dc0cf82305e4f0f6c1",
+  "amount": 15000.75,
+  "debitAccount": "0011223344556677889900",
+  "creditAccount": "0099887766554433221100",
+  "date": "2024-08-20T12:34:56Z"
 }
 ```
 
@@ -101,7 +108,7 @@ This API incorporates several layers of security to simulate real-world enterpri
 
 ### ✅ Input Validation
 
-- All incoming payloads are validated using **Joi** to ensure data integrity.
+- All incoming payloads are validated ensure data integrity.
 - Invalid or malformed data receives a `400 Bad Request`.
 
 ### ✅ HTTPS
@@ -146,12 +153,12 @@ This project uses **Hexagonal Architecture (Ports and Adapters)** to structure t
 
 ## 🔑 Authentication Flow
 
-1. **Login** using a valid CUIT and password:
+1. **Login** using a valid userName and password:
 
 ```bash
 curl -X POST https://challenge-interbanking.crisdev.tech/auth/login \
      -H "Content-Type: application/json" \
-     -d '{ "cuit": "20304050607", "password": "interbank123" }'
+     -d '{ "userName": "20304050607", "password": "interbank123" }'
 ```
 
 2. **Receive token**:
