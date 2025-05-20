@@ -51,7 +51,7 @@ http://localhost:${process.env.PORT}
 ```
 
 ---
-5. This API will be available at production :
+This API will be available at production :
 
 ```
 https://challenge-sooft.crisdev.tech
