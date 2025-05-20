@@ -1,8 +1,11 @@
-# Interbanking Challenge API 🚀
+# Sooft technologies Backend Challenge API 🚀
 
-Welcome to the backend solution developed for the Interbanking technical challenge. This REST API is built with **Node.js**, **Express**, **MongoDB**, and follows the **Hexagonal Architecture (Ports and Adapters)** pattern. The project is containerized with Docker and includes security layers such as **JWT-based authentication** and **HTTPS support**.
+Welcome to the backend solution developed for the technical challenge. This REST API is built with **Node.js**, **Express**, **MongoDB**, and follows the **Hexagonal Architecture (Ports and Adapters)** pattern. The project is containerized with Docker and includes security layers such as **JWT-based authentication** and **HTTPS support**.
 
-🔗 Deployed at: https://challenge-interbanking.crisdev.tech
+It was assumed that "transfers from last month" are those from the current month, taking into account that the endpoint to create new transfers was also added, the functionality can be tested with those newly created transfers.
+
+
+🔗 Deployed at: https://challenge-sooft.crisdev.tech
 
 ---
 
@@ -65,6 +68,7 @@ https://challenge-interbanking.crisdev.tech
 | GET    | `/v1/transfers/recent/companies`         | Lists companies with transfers in last month          |
 | GET    | `/v1/companies/recent`                   | Lists companies added in last month                   |
 | POST   | `/v1/companies`                          | Registers a new company                               |
+| POST   | `/v1/transfers`                          | Registers a new transfer                              |
 
 All protected endpoints require a valid JWT in the `Authorization` header.
 
